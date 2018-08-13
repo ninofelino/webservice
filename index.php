@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 include 'qry.php';
+include 'tree.php';
 
 Flight::register('db', 'PDO', array('pgsql:host=103.28.15.75;dbname=felino','deploy','nuansabaru123'));
 
@@ -10,15 +11,19 @@ Flight::route('/', function(){
   
 //Flight::render('body', array('body' => 'World'), 'body_content');
 //Flight::render('layout', array('title' => 'Home Page'));
-echo '<a href="product">Product</a>';
-    echo '<a href="test">Test</a>';
-    echo '<a href="upload">Upload</a>';
-    echo '<a href="menu">menu</a>';
-    echo '<a href="list">List Db</a>';
-    echo '<a href="pr.supplier">Product By Supplier</a>';
-    echo '<a href="http://flightphp.com/learn/">Reference</a>';
+
    
-    
+    $menu = menus();
+    //echo $menu;
+
+    $loader = new Twig_Loader_Filesystem('views');
+$twig = new Twig_Environment($loader);
+echo $twig->render('layout.php', array(
+    'name'  => 'Frey',
+    'city'  => 'Samarinda',
+    'menu'    => $menu
+
+));
 
 });
 
@@ -37,6 +42,7 @@ Flight::route('/test', function(){
 });
 
 Flight::route('/product', function(){
+   // Flight::render('layout', array('title' => 'Product'));
     product(); 
  });
 
@@ -58,6 +64,24 @@ Flight::route('/upload', function(){
     getResult('select * from brands');
     echo "</tbody></table>";  
 });
+
+Flight::route('/menu', function(){
+  
+     menus();
+  
+});
+
+function print_list($array, $parent=0) {
+    print "<ul>";
+    foreach ($array as $row) {
+     //   if ($row->parent_id == $parent) {
+            print "<li>$row->name";
+            print_list($array, $row->id);  # recurse
+            print "</li>";
+   // }  
+    }
+    print "</ul>";
+};
 
 Flight::route('/list', function(){
     echo 'Upload';
