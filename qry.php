@@ -6,7 +6,7 @@ function getResult($qry){
 $db = 'felino';
 $username = 'deploy';
 $password = 'nuansabaru123';
-    $dsn = "pgsql:host=$host;port=5432;dbname=$db;user=$username;password=$password";
+$dsn = "pgsql:host=$host;port=5432;dbname=$db;user=$username;password=$password";
 
 
     $pdo = new PDO($dsn);
@@ -96,7 +96,7 @@ function get_menu($data, $parent = 0) {
       
         return $result;
       }
-      echo build_menu($menu);
+   //   echo build_menu($menu);
 
       function login() {
         $username = $_POST['username'];
@@ -111,3 +111,14 @@ function get_menu($data, $parent = 0) {
             )
         ));
     };
+
+    function mclass(){
+        echo "Mclass";
+     };
+     
+     function brand(){
+        echo "Brands";
+        return "LLLLL";
+     };
+
+?>     

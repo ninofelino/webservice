@@ -14,7 +14,7 @@ function menus()
     {
     // print $row[1].$row[0].'</br>';
      $arrayCategories[$row['id']] = array("parent_id" => $row['parent_id'], "name" =>                       
-     $row['name']);   
+     $row['name'],"url"=>$row['url'],"img"=>$row['img']);   
     }
     $result=createTreeView($arrayCategories, 0);
     return $result;
@@ -29,9 +29,9 @@ function createTreeView($array, $currentParent, $currLevel = 0, $prevLevel = -1)
     if ($currentParent == $category['parent_id']) {                       
         if ($currLevel > $prevLevel) $hasil.= " <ul class='tree'> "; 
     
-        if ($currLevel == $prevLevel) $hasil.= " </li> ";
+        if ($currLevel == $prevLevel) $hasil.= " ";
     
-        $hasil.= '<li> <label for="subfolder2">'.$category['name'].'</label> <input type="checkbox" name="subfolder2"/>';
+        $hasil.= '<a class="mdl-navigation__link" href="'.$category['url'].'"><i class="material-icons">'.$category['img'].'</i>'.$category['name'].'</a></span>';
     
         if ($currLevel > $prevLevel) { $prevLevel = $currLevel; }
     

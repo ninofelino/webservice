@@ -1,0 +1,1 @@
+select id,rtrim(name) as name from supplier

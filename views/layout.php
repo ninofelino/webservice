@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="myApp" >
+<html>
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>NuansaBaru</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="lib/angular.js"></script>
-    <script src="lib/angular-touch.js"></script>
-    <script src="lib/angular-resource.js"></script>
-    <script src="lib/angular-animate.js"></script>
-    <script src="lib/angular-route.js"></script>
-   
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="js/jquery.tabledit.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 </head>
 <body>
@@ -36,12 +46,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">DashBoard</span>
     <nav class="mdl-navigation">
-       <?php
-         include "tree.php";
-         echo "lll";
-        // menus();
-       ?>
-       
+             
        {{menu | raw}}
       <a class="mdl-navigation__link" href="adminer.php">Adminer.php</a>
       <a class="mdl-navigation__link" href="">Link</a>
@@ -52,72 +57,17 @@
   <main class="mdl-layout__content">
     <div class="page-content" ng-app>
       
-    <!-- Your content goes here -->
-     {{10+10}}
-     <a ng-click="go('/employees/' + employee.id)">
-       click
-     </a>
-     <a href="product">Product</a>
-     <a href="#dept">Dep</a>
-     <a href="#branch">Branch</a>
-     <a href="#employees"> employeesls</a>
-     <a href="adminer.php">Database</a>
-     <a href="debug.html">Debug</a>
-     <a href="shell.php">Bash</a>
-     <a href="indeximages.php">Bash</a>
-     <a href="#image">Images</a>
-     <a href="image.php">Find Image</a>
-     <a href="#supplier">Supplier</a>
-     <a href="productbysupplier.php">Product By Supplier</a>
+  
      
-     <?php
-       echo '<a href="product">Product</a>';
-       echo '<a href="test">Test</a>';
-       echo '<a href="upload">Upload</a>';
-       echo '<a href="menu">menu</a>';
-       echo '<a href="list">List Db</a>';
-       echo '<a href="pr.supplier">Product By Supplier</a>';
-       echo '<a href="http://flightphp.com/learn/">Reference</a>';
-     ?>
 
-     <div ng-view>
-          <a href="https://developers.google.com/speed/pagespeed/insights/">Page Speed</a> 
-
-     </div>
-    
+   
+     {% block content %}
+     {% endblock %}       
   </div>
   </main>
 </div>
 </body>
-<script>
-  'use strict';
 
-angular.module('myApp', [
-    'ngTouch',
-    'ngRoute',
-    'ngAnimate',
-    'myApp.controllers',
-    'myApp.memoryServices'
-]).
-config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/product', {templateUrl: 'product', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/brands', {templateUrl: 'brands.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/branch', {templateUrl: 'branch.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/dept', {templateUrl: 'dept.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/size', {templateUrl: 'product.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/image', {templateUrl: 'findimage.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/postgre', {templateUrl: 'adminer.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/mclass', {templateUrl: 'mclass.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/info', {templateUrl: 'info.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/catalog', {templateUrl: 'catalog.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/supplier', {templateUrl: 'supplier.php', controller: 'EmployeeListCtrl'});
-    
-   
-    $routeProvider.when('/employees', {templateUrl: 'sql.php', controller: 'EmployeeListCtrl'});
-    $routeProvider.when('/employees/:employeeId', {templateUrl: 'partials/employee-detail.html', controller: 'EmployeeDetailCtrl'});
-    $routeProvider.when('/employees/:employeeId/reports', {templateUrl: 'partials/report-list.html', controller: 'ReportListCtrl'});
-  //  $routeProvider.otherwise({redirectTo: '/employees'});
-}]);
-</script>
 
 </html>
+

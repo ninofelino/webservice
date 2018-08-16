@@ -1,0 +1,1 @@
+select id,parent,rtrim(name) as text from mclass

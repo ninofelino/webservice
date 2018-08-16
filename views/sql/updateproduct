@@ -1,0 +1,2 @@
+update product set colour=
+rtrim(ltrim(replace(replace(desc1,size,''),article,'')))
