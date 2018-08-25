@@ -10,8 +10,8 @@ Flight::route('/', function(){
       $menu = menus();
       $loader = new Twig_Loader_Filesystem('views');
       $twig = new Twig_Environment($loader);
-      echo $twig->render('layout.php', array(
-      'name'  => 'Frey',
+      echo $twig->render('welcome.php', array(
+      'name'  => 'Home',
     'city'  => 'Samarinda',
     'menu'    => $menu
 
@@ -22,15 +22,12 @@ Flight::route('/', function(){
 Flight::route('POST /login', 'login');
 
 
-Flight::route('/test', function(){
+Flight::route('/barcode/@id', function($id){
+    $sql = file_get_contents('views/sql/barcode.sql');
+    $sql = $sql." where article like '".$id."%'";
     $db = Flight::db();
-    $stmt=$db->query('select * from product');
-    while ($row = $stmt->fetch())
-{
-    echo $row[1] . "\n";
-}
-
-    echo 'Test!';
+     $results=$db->query($sql)->fetchAll();
+     Flight::json($results);
 });
 
 Flight::route('/product', function(){
@@ -46,14 +43,69 @@ Flight::route('/product', function(){
      
      //echo print_r($brand);
      echo $twig->render('product.php', array(
-        
+         'name' => 'Product',
          'product'  => $product,
          'menu'  => $menu
      ));
   });
 
 
-Flight::route('/product/list', function(){
+  Flight::route('/catagory/list', function(){
+   
+    // $product=product(); 
+    $sql = file_get_contents('views/sql/catagory.sql');
+    $db = Flight::db();
+     $results=$db->query($sql)->fetchAll();
+     Flight::json($results);
+     
+  });
+
+  Flight::route('/images', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    $sql = "select * from menus";
+    $db = Flight::db();
+    $brand=$db->query('select * from brands')->fetchAll();
+    
+    //echo print_r($brand);
+    echo $twig->render('images.php', array(
+        'name'  => 'Images',
+        'brand'  => $brand,
+        'menu'  => $menu
+    ));
+   
+    });
+
+
+    Flight::route('/menu', function(){
+        $menu = menus();
+       
+        echo $menu; 
+        
+       
+        });
+
+
+  Flight::route('/images/@id', function($id){
+    
+    $gb=find("../img/_sfpg_data/thumb/",$id."*.jpg");
+   // print_r($gb);
+    foreach($gb as $gambar){
+        echo '<div class="mdl-cell mdl-cell--3-col">';
+        echo basename($gambar).'<br>';
+        echo '<img src="http://103.28.15.75:8069/'.$gambar.'">';
+        echo '</div>';
+    }
+    
+});
+
+Flight::route('/script', function(){
+    echo "images";
+    print_r(glob("/var/www/html/*.JPG"));
+});
+
+  Flight::route('/product/list', function(){
    
     // $product=product(); 
     $sql = file_get_contents('views/sql/pr.supplier.detail.sql');
@@ -95,22 +147,35 @@ Flight::route('/product/list', function(){
     
     //echo print_r($brand);
     echo $twig->render('brand.php', array(
-        'name'  => 'Frey',
+        'name'  => 'Brand',
         'brand'  => $brand,
         'menu'  => $menu
     ));
    
     });
 
+    Flight::route('/pos', function(){
+        $menu = menus();
+        $loader = new Twig_Loader_Filesystem('views');
+        $twig = new Twig_Environment($loader);
+        $sql = "select * from menus";
+        $db = Flight::db();
+        $brand=$db->query('select * from brands')->fetchAll();
+        
+        //echo print_r($brand);
+        echo $twig->render('pos.html', array(
+            'name'  => 'Point Of Sale',
+            'brand'  => $brand,
+            'menu'  => $menu
+        ));
+       
+        });
+
     Flight::route('/brand/list', function(){
         $pdo = Flight::db();
         $statement = $pdo->prepare("SELECT * FROM brands");
         $statement->execute();
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-        Flight::json($results);
-     
-       
-        });
+     });
 
 
         Flight::route('/colour', function(){
@@ -123,7 +188,7 @@ Flight::route('/product/list', function(){
             
             //echo print_r($brand);
             echo $twig->render('colour.php', array(
-                'name'  => 'Frey',
+                'name'  => 'Colour',
                 'brand'  => $brand,
                 'menu'  => $menu
             ));
@@ -165,9 +230,7 @@ Flight::route('/size', function(){
     ));
    
 });
-
-
-Flight::route('/branch/list', function(){
+Flight::route('/branchlistFolderFiles/list', function(){
     
     $pdo = new PDO("pgsql:dbname=felino;host=103.28.15.75", "deploy", "nuansabaru123");
  $statement = $pdo->prepare("SELECT * FROM branch");
@@ -191,7 +254,7 @@ Flight::route('/branch', function(){
     
     //echo print_r($brand);
     echo $twig->render('branch.php', array(
-        'name'  => 'Frey',
+        'name'  => 'Branch',
         'size'  => $brand,
         'menu'  => $menu
     ));
@@ -200,7 +263,7 @@ Flight::route('/branch', function(){
 
 Flight::route('/member', function(){
     $menu = menus();
-    $sql = file_get_contents('views/sql/pr.size.sql');
+   // $sql = file_get_contents('views/sql/pr.size.sql');
     $sql = "select * from members";
     $loader = new Twig_Loader_Filesystem('views');
     $twig = new Twig_Environment($loader);
@@ -215,25 +278,26 @@ Flight::route('/member', function(){
 });
 
 
-    Flight::route('/mclass', function(){
-        $loader = new Twig_Loader_Filesystem('views');
-        $twig = new Twig_Environment($loader);
-        $menu = menus();
-        $db = Flight::db();
-        $mclass=$db->query('select * from mclass')->fetchAll();
-        echo $twig->render('mclass.php', array(
+Flight::route('/mclass', function(){
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    $menu = menus();
+    $db = Flight::db();
+    $mclass=$db->query('select * from mclass')->fetchAll();
+    echo $twig->render('mclass.php', array(
+            'name' =>'Mclass',
             'menu'  => $menu,
             'mclass'  => $mclass
             ));
-        mclass(); 
-        });    
+    }); 
+
     Flight::route('/mclass/list', function(){
         $pdo = new PDO("pgsql:dbname=felino;host=103.28.15.75", "deploy", "nuansabaru123");
         $sql = file_get_contents('views/sql/mclass.sql');
         $statement = $pdo->prepare($sql);
        $statement->execute();
        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-       //$json = json_encode($results);
+      
        
       Flight::json($results);
         });    
@@ -249,7 +313,7 @@ Flight::route('/supplier', function(){
         'menu'  => $menu,
         'mclass'  => $mclass
         ));
-    mclass(); 
+   // mclass(); 
 });
 
 Flight::route('/supplier/list', function(){
@@ -257,8 +321,19 @@ Flight::route('/supplier/list', function(){
     Flight::json($results);
 });
 
- Flight::route('/pr.supplier', function(){
+Flight::route('/pr.supplier', function(){
     productSupplier(); 
+ });
+
+
+ Flight::route('/purchaseOrder', function(){
+       echo "Purchase Order";
+ });
+
+
+ Flight::route('/syncron', function(){
+    $output=shell_exec('script/sh pr.sh');
+   print_r($output);
  });
 
  Flight::route('/pr.supplier/@id', function($id){
@@ -266,7 +341,7 @@ Flight::route('/supplier/list', function(){
     echo "<table><tbody>";
     productSupplierDetail($id);
     echo "</tbody></table>";  
-   // productSupplier(); 
+       // productSupplier(); 
  });
 
 Flight::route('/upload', function(){
@@ -282,7 +357,7 @@ Flight::route('/menu', function(){
   
 });
 
-function print_list($array, $parent=0) {
+function print_lilistFolderFilesst($array, $parent=0) {
     print "<ul>";
     foreach ($array as $row) {
      //   if ($row->parent_id == $parent) {
@@ -303,3 +378,5 @@ Flight::route('/list', function(){
 
 
 Flight::start();
+
+

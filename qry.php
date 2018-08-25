@@ -1,6 +1,26 @@
 <?php
 require_once 'dbconfig.php';
 
+
+function listFolderFiles($dir){
+    $ffs = scandir($dir);
+
+    unset($ffs[array_search('.', $ffs, true)]);
+    unset($ffs[array_search('..', $ffs, true)]);
+
+    // prevent empty ordered elements
+    if (count($ffs) < 1)
+        return;
+
+    echo '<ol>';
+    foreach($ffs as $ff){
+        echo '<li>'.$ff;
+        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
+        echo '</li>';
+    }
+    echo '</ol>';
+}
+
 function getResult($qry){
     $host='103.28.15.75';
 $db = 'felino';
@@ -23,7 +43,7 @@ $dsn = "pgsql:host=$host;port=5432;dbname=$db;user=$username;password=$password"
 }
 
 
-function product(){
+function Xproduct(){
     getResult("select * from product");
 };
 
@@ -112,13 +132,23 @@ function get_menu($data, $parent = 0) {
         ));
     };
 
-    function mclass(){
-        echo "Mclass";
-     };
-     
-     function brand(){
-        echo "Brands";
-        return "LLLLL";
-     };
+    
+
+
+     function find($dir, $pattern){
+        // escape any character in a string that might be used to trick
+        // a shell command into executing arbitrary commands
+        $dir = escapeshellcmd($dir);
+        // get a list of all matching files in the current directory
+        $files = glob("$dir/$pattern");
+        // find a list of all directories in the current directory
+        // directories beginning with a dot are also included
+        foreach (glob("$dir/{.[^.]*,*}", GLOB_BRACE|GLOB_ONLYDIR) as $sub_dir){
+            $arr   = find($sub_dir, $pattern);  // resursive call
+            $files = array_merge($files, $arr); // merge array with files from subdirectory
+        }
+        // return all found files 
+        return $files;
+    }
 
 ?>     

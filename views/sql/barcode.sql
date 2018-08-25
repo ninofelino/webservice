@@ -1,0 +1,1 @@
+select concat(article,' ',colour) as label,barcode as value from product

@@ -3,31 +3,26 @@
 
 {% block content %}
 
+<div class="mdl-grid">
+<div class="mdl-cell mdl-cell--4-col" id="jstree"></div>
+    
+<div class="mdl-cell mdl-cell--4-col" id="jsGrid"></div> 
+</div>
+   
       
-<div class = "mdl-grid">
-    <div class = "mdl-cell mdl-cell--3-col graybox">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                       Syncron Data
-        </button>
-               
-    <div id="jstree"></div>
-    </div>
-             
-<div class = "mdl-cell mdl-cell--6-col graybox">
-    <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+
 		
       
-      <div id="jsGrid"></div> 
-    </div>
+    
 
-</div>
+
             
             
 <script>
 $('#jstree').jstree({
 		'core' : {
 			'data' : {
-				"url" : "http://103.28.15.75:8069/api/js/product.json",
+				"url" : "http://103.28.15.75:8069/api/catagory/list",
 				"dataType" : "json" // needed only if you do not supply JSON headers
 			}
 		}
