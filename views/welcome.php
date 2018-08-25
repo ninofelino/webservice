@@ -1,96 +1,178 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Required meta tags always come first -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material Design Lite Starter Project</title>
-    <link rel="shortcut icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap Template</title>
 
-    <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!--font-awesome-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="vendor/material-design-lite/material.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
- 
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/components/icons--modifiers.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+   <!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet">>
 </head>
-<body>
 
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Job Attractor</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="#">ABOUT</a>
-                <a class="mdl-navigation__link" href="#">FAQ</a>
-                <a class="mdl-navigation__link" href="#">BLOG</a>
-                <a class="mdl-navigation__link" href="#">LOGIN</a>
-            </nav>
-            <!--Right aligned menu below button -->
-            <div class="mdl-menu--headerWrapper">
-                <button id="menu-speed" class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-speed">
-                    <li class="mdl-menu__item">Fast</li>
-                    <li class="mdl-menu__item">Medium</li>
-                    <li class="mdl-menu__item">Slow</li>
-                </ul>
-            </div>
+<body class="fixed-sn pink-skin">
+
+    <!--Double navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-4 fixed mdb-sidenav">
+            <ul class="custom-scrollbar list-unstyled" style="max-height:100vh;">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center"></a>
+                    </div>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+                <li>
+                    <ul class="social">
+                        <li><a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+                        <li><a href="#" class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+                        <li><a href="#" class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+                        <li><a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+                    </ul>
+                </li>
+                <!--/Social-->
+                <!--Search Form-->
+                <li>
+                    <form class="search-form" role="search">
+                                <div class="form-group md-form mt-0 pt-1 waves-light">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </form>
+                </li>
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> Submit blog<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#" class="waves-effect">Submit listing</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Registration form</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> Instruction<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#" class="waves-effect">For bloggers</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">For authors</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-eye"></i> About<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#" class="waves-effect">Introduction</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Monthly meetings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> Contact me<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Write a message</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Write a message</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Write a message</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Write a message</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
         </div>
-    </header>
-    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-        <span class="mdl-layout-title">Title</span>
-        <nav class="mdl-navigation">
-            <div id="badan"></div>
-            <a class="mdl-navigation__link" href="#">ABOUT</a>
-            <a class="mdl-navigation__link" href="#">FAQ</a>
-            <a class="mdl-navigation__link" href="#">BLOG</a>
-            <a class="mdl-navigation__link" href="#">LOGIN</a>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto">
+                <p>Material Design for Bootstrap</p>
+            </div>
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-comments-o"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
-    </div>
-    <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-        <div class="content-grid mdl-grid">
-  <div class="content-column mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-    <!-- add content here -->
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, quia. Quaerat, vel neque adipisci autem nemo voluptates unde fuga asperiores aut veniam laudantium molestiae amet deleniti, nostrum dolores. Adipisci, dolorum?
-  </div>
-  <div class="content-column mdl-cell mdl-cell--4-col mdl-cell--4-col-phone mdl-cell--hide-tablet">
-    <!-- also here -->
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
     
-
-  </div>
-  <div class="content-column mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--bottom mdl-cell--hide-phone">
-    <!-- and probably also here -->
-  </div>
-</div>
-        
-        
+    <!--Main Layout-->
+    <main>
+        <div class="container-fluid">
+            <h2>Advanced Double Navigation with fixed SideNav & non-fixed Navbar:</h2>
+            <br>
+            <h5>1. Fixed side menu, hidden on small devices.</h5>
+            <h5>2. Non-fixed Navbar. It will disappear when you scroll down.</h5>
+            <div style="height: 2000px"></div>
         </div>
     </main>
-</div>
+    <!--Main Layout-->
+    
+    <!-- SCRIPTS -->
 
-<script>
-    $('#badan').load('menu');
-</script> 
+   <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script>
+    <script>
+        
+        // SideNav Initialization
+       
 
+    </script>
 </body>
-   
-
 </html>

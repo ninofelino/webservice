@@ -7,13 +7,27 @@ Flight::register('db', 'PDO', array('pgsql:host=103.28.15.75;dbname=felino','dep
 
 
 Flight::route('/', function(){
-      $menu = menus();
-      $loader = new Twig_Loader_Filesystem('views');
-      $twig = new Twig_Environment($loader);
-      echo $twig->render('welcome.php', array(
-      'name'  => 'Home',
-    'city'  => 'Samarinda',
-    'menu'    => $menu
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('welcome.html', array(
+    'name'  => 'Home',
+  'city'  => 'Samarinda',
+  'menu'    => $menu
+
+));
+
+});
+
+
+Flight::route('/calendar', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('calendar.html', array(
+    'name'  => 'Home',
+  'city'  => 'Samarinda',
+  'menu'    => $menu
 
 ));
 
@@ -67,8 +81,6 @@ Flight::route('/product', function(){
     $sql = "select * from menus";
     $db = Flight::db();
     $brand=$db->query('select * from brands')->fetchAll();
-    
-    //echo print_r($brand);
     echo $twig->render('images.php', array(
         'name'  => 'Images',
         'brand'  => $brand,
@@ -79,12 +91,21 @@ Flight::route('/product', function(){
 
 
     Flight::route('/menu', function(){
-        $menu = menus();
-       
-        echo $menu; 
-        
-       
+        $sql = file_get_contents('views/sql/menu.sql');
+        $db = Flight::db();
+         $results=$db->query($sql)->fetchAll();
+         //Flight::json($results);
+         header('Content-Type: application/json');
+         echo '{"menu":'.json_encode($results).'}' ;
         });
+
+        Flight::route('/nav', function(){
+            $menu = nav();
+           
+            echo $menu; 
+            
+           
+            });      
 
 
   Flight::route('/images/@id', function($id){
@@ -136,8 +157,7 @@ Flight::route('/script', function(){
      ));
   });
 
-
-  Flight::route('/brand', function(){
+  Flight::route('/pos', function(){
     $menu = menus();
     $loader = new Twig_Loader_Filesystem('views');
     $twig = new Twig_Environment($loader);
@@ -146,6 +166,21 @@ Flight::route('/script', function(){
     $brand=$db->query('select * from brands')->fetchAll();
     
     //echo print_r($brand);
+    echo $twig->render('pos.html', array(
+        'name'  => 'Point Of Sale',
+        'brand'  => $brand,
+        'menu'  => $menu
+    ));
+   
+    });
+
+  Flight::route('/brand', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    $sql = "select * from menus";
+    $db = Flight::db();
+    $brand=$db->query('select * from brands')->fetchAll();
     echo $twig->render('brand.php', array(
         'name'  => 'Brand',
         'brand'  => $brand,
@@ -154,29 +189,54 @@ Flight::route('/script', function(){
    
     });
 
-    Flight::route('/pos', function(){
+
+    Flight::route('/upload/home', function(){
         $menu = menus();
         $loader = new Twig_Loader_Filesystem('views');
         $twig = new Twig_Environment($loader);
         $sql = "select * from menus";
         $db = Flight::db();
         $brand=$db->query('select * from brands')->fetchAll();
-        
-        //echo print_r($brand);
-        echo $twig->render('pos.html', array(
-            'name'  => 'Point Of Sale',
+        echo $twig->render('upload.php', array(
+            'name'  => 'Brand',
             'brand'  => $brand,
             'menu'  => $menu
         ));
        
         });
 
-    Flight::route('/brand/list', function(){
-        $pdo = Flight::db();
-        $statement = $pdo->prepare("SELECT * FROM brands");
-        $statement->execute();
-     });
+        Flight::route('/upload/post', function(){
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // Check if image file is a actual image or fake image
+            if(isset($_POST["submit"])) {
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+            } 
+           
+           echo "Success";
+            });
 
+    Flight::route('/brand/list', function(){
+        $sql = file_get_contents('views/sql/brand.sql');
+        $db = Flight::db();
+         $results=$db->query($sql)->fetchAll();
+         Flight::json($results);
+     });
+     
+
+     Flight::route('/dbf', function(){
+       // print_r(getFileList('/var/www/html/DAT'));
+       Flight::json(getFileList('/var/www/html/DAT'));
+     });
 
         Flight::route('/colour', function(){
             $menu = menus();

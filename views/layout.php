@@ -24,12 +24,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
-  <script src="js/jquery.autocompleter.js"></script> 
-  <script src="js/jquery.spin.js"></script> 
   
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  
-  
+  {% block header %}
+     {% endblock %} 
   
 </head>
 <body>

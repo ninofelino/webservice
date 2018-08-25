@@ -1,4 +1,14 @@
 {% extends "layout.php" %}
+
+{% block header %}
+<script src="js/jquery.autocompleter.js"></script> 
+  <script src="js/jquery.spin.js"></script> 
+  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="http://103.28.15.75:8069/api/js/pos.js"></script>
+
+{% endblock %} 
+
 {% block content %}
 <style>
   table {
@@ -146,26 +156,25 @@ body{
 	</div>	 
 
 <script>
+$('#tombol').click(function(){
+    $('#modal-kotak , #bg').fadeIn("slow");
+});
+$('#tombol-tutup').click(function(){
+    $('#modal-kotak , #bg').fadeOut("slow");
+});
+
+$('#terima').click(function(){
+    $('#modal-kotak , #bg').fadeIn("slow");
+});
+$('#tombol-tutup').click(function(){
+    $('#modal-kotak , #bg').fadeOut("slow");
+});
    
     
 </script>
 <script>
 
- $('#tombol').click(function(){
-				$('#modal-kotak , #bg').fadeIn("slow");
-			});
-			$('#tombol-tutup').click(function(){
-				$('#modal-kotak , #bg').fadeOut("slow");
-      });
-
- $('#terima').click(function(){
-				$('#modal-kotak , #bg').fadeIn("slow");
-			});
-			$('#tombol-tutup').click(function(){
-				$('#modal-kotak , #bg').fadeOut("slow");
-      });
-
-
+ 
 
 var cari='6';
 var peopleHTML='';
@@ -177,7 +186,7 @@ $('#add').click(function(){
 $("#addrow").click(function(){
     $(".item-row:last").after('<tr class="item-row"><td class="item-name"><div class="delete-wpr">Item Name<a class="delete" href="javascript:;" title="Remove row">X</a></div></td><td class="description"><textarea>Description</textarea></td><td><textarea class="cost">$0</textarea></td><td><textarea class="qty">0</textarea></td><td><span class="price">$0</span></td></tr>');
     if ($(".delete").length > 0) $(".delete").show();
-    bind();
+  
   });
 
 $("#members").change(function(){
