@@ -19,12 +19,39 @@ Flight::route('/', function(){
 
 });
 
+Flight::route('/test', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('layoutstd.php', array(
+    'name'  => 'Home',
+  'city'  => 'Samarinda',
+  'menu'    => $menu
+
+));
+
+});
+
 
 Flight::route('/calendar', function(){
     $menu = menus();
     $loader = new Twig_Loader_Filesystem('views');
     $twig = new Twig_Environment($loader);
     echo $twig->render('calendar.html', array(
+    'name'  => 'Home',
+  'city'  => 'Samarinda',
+  'menu'    => $menu
+
+));
+
+});
+
+
+Flight::route('/login', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('login.html', array(
     'name'  => 'Home',
   'city'  => 'Samarinda',
   'menu'    => $menu
@@ -40,6 +67,21 @@ Flight::route('/barcode/@id', function($id){
     $sql = file_get_contents('views/sql/barcode.sql');
     $sql = $sql." where article like '".$id."%'";
     $db = Flight::db();
+     $results=$db->query($sql)->fetchAll();
+     Flight::json($results);
+});
+
+
+Flight::route('/infodb', function(){
+    $sql = file_get_contents('views/sql/infodb.sql');
+     $db = Flight::db();
+     $results=$db->query($sql)->fetchAll();
+     Flight::json($results);
+});
+
+Flight::route('/supplier/topten', function(){
+    $sql = file_get_contents('views/sql/topsupplier.sql');
+     $db = Flight::db();
      $results=$db->query($sql)->fetchAll();
      Flight::json($results);
 });
@@ -126,6 +168,14 @@ Flight::route('/script', function(){
     print_r(glob("/var/www/html/*.JPG"));
 });
 
+
+Flight::route('/syncron', function(){
+    echo "Syncron";
+   // $output = passthru('sh /var/www/html/api/script/pr.sh');
+   $output = passthru('top');
+    echo $output;
+});
+
   Flight::route('/product/list', function(){
    
     // $product=product(); 
@@ -173,6 +223,14 @@ Flight::route('/script', function(){
     ));
    
     });
+
+    Flight::route('/terminal', function(){
+        $loader = new Twig_Loader_Filesystem('views');
+        $twig = new Twig_Environment($loader);
+       echo $twig->render('terminal.html');
+       
+        });
+
 
   Flight::route('/brand', function(){
     $menu = menus();
@@ -234,9 +292,23 @@ Flight::route('/script', function(){
      
 
      Flight::route('/dbf', function(){
-       // print_r(getFileList('/var/www/html/DAT'));
-       Flight::json(getFileList('/var/www/html/DAT'));
+        $loader = new Twig_Loader_Filesystem('views');
+        $twig = new Twig_Environment($loader);
+        $sql = "select * from menus";
+        $db = Flight::db();
+        $brand=$db->query('select * from brands')->fetchAll();
+        echo $twig->render('dbf.html', array(
+            'name'  => 'Brand',
+            'brand'  => $brand
+        ));
      });
+
+     Flight::route('/dbf/list', function(){
+        // print_r(getFileList('/var/www/html/DAT'));
+    //  header('Content-Type: application/json');
+       // echo getFileList('/var/www/html/DAT');
+        Flight::json(getFileList('/var/www/html/DAT'));
+      });
 
         Flight::route('/colour', function(){
             $menu = menus();

@@ -1,24 +1,50 @@
-{% extends "layout.php" %}
+{% extends "layoutstd.php" %}
 
 
 {% block content %}
 
-<div class="mdl-grid">
-<div class="mdl-cell mdl-cell--4-col" id="jstree"></div>
+<div class="row">
+<br><br>
+     <div class="col-md-3">
+     <input class="form-control" placeholder="Search Product" name="srch-term" id="srch-term" type="text">
+        <div id="jstree"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="jsGrid"></div>
+    </div>
+
+    <div class="col-md-2">
+        <button>SyncronData</button>
+        <p>
+          melakukan syncronisasi data dengan INV.DBF di directory
+          /var/www/html/DAT
+</p>  
+        <li><a href="script/shell.php">Run Script</a></li> 
+        <p>Mengambil data dari INV.DBF Ke Postgre Database</p> 
+        <li><a href="script/shell.php">Tranfer Data Ke Postgree</a></li>
+</code>
+    </div>
+
     
-<div class="mdl-cell mdl-cell--4-col" id="jsGrid"></div> 
 </div>
+
+
    
-      
-
-		
-      
-    
-
-
-            
-            
 <script>
+
+$.ajax({
+	url:"menu",dataType: "json",
+	success:function(data){
+   	var clickAction = function(id){
+			console.log("clickAction: ", id);
+		}
+	   
+		$( "#menuUI" ).menuUI(data, clickAction);
+    } //endof success
+});
+
+
+
 $('#jstree').jstree({
 		'core' : {
 			'data' : {
@@ -34,7 +60,7 @@ $('#jstree').jstree({
 <script>
 
 $("#jsGrid").jsGrid({
-  width: "60%",
+  width: "100%",
   height: "auto",
   inserting: false,
         editing: true,
@@ -42,7 +68,7 @@ $("#jsGrid").jsGrid({
         paging: true,
   autoload:   true,
   paging:     true,
-  pageSize:   10,
+  pageSize:   20,
   pageButtonCount: 5,
   pageIndex:  1,
 

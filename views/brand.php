@@ -1,12 +1,29 @@
-{% extends "layout.php" %}
+{% extends "layoutstd.php" %}
 
 
 {% block content %}
+<br>
+<br>
+<h3>Brand</h3>
+<p>
+  Merk / Label Suatu product
+</p>  
 <div id="jsGrid"></div>
 
 
 
 <script>
+
+$.ajax({
+	url:"menu",dataType: "json",
+	success:function(data){
+   	var clickAction = function(id){
+			console.log("clickAction: ", id);
+		}
+	   
+		$( "#menuUI" ).menuUI(data, clickAction);
+    } //endof success
+});
 
 $("#jsGrid").jsGrid({
   width: "50%",

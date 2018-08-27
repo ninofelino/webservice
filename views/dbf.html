@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Document</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ay-json-to-table.js"></script>
+</head>
+<body>
+    DBF LIST
+    <div id="gambar"></div>
+    <script>
+       
+        $.ajax({
+          url:"dbf/list",
+          success:function(data){
+          var hasil='';    
+          data.sort(function(a, b){return a.name - b.name});
+          $.each(data,function(i,val){
+              hasil=hasil+'<li>'+val['name']+'</li>';
+            
+          }) ;   
+          $("#gambar").append(hasil); 
+        
+             
+          } //endof success
+      });
+      </script> 
+
+</body>
+
+ 
+</html>

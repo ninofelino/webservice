@@ -7,7 +7,7 @@
     <title>NuansaBaru</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="js/jQuery.menuUI.css">
-	<link rel="stylesheet" href="js/font-awesome.csss">
+	<link rel="stylesheet" href="js/font-awesome.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="js/calendar.css">
 </head>
@@ -32,45 +32,41 @@
 			</p>
 		</div>
 		<div class="col-md-3">
-			<h2>
-				Product
-			</h2>
-			<input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
+			<h2>PhotoProduct</h2>
+			<p>Gambar yang berasal dari camera yang telah diupload ke clouds</p>
+			<input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" onkeyup="carigambar(this.value)">
             <div id="gambar"></div>                   
 			    
-			<p> 
-				Message From server
+			
+		</div>
+		<div class="col-md-3">
+			<h2>DataSource</h2>
+			<p>Informasi beberapa tabel dan jumklah record dari server Database postgre
 			</p>
+
+			<div id="infodb"></div>
+			
+		
+			
 			<p>
 				<a class="btn" href="#">View details »</a>
 			</p>
 		</div>
 		<div class="col-md-3">
-			<h2>
-				DATA SYNCRON
-			</h2>
-			<table id="table_id" class="display">
-					<thead>
-						<tr>
-							<th>TableName</th>
-							<th>Size</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>INV.DBF</td>
-							<td>143MB</td>
-						</tr>
-						
-					</tbody>
-				</table>
-				<div id="calendar"></div>
-			<p>
-				Done</p>
-			<p>
-				<a class="btn" href="#">View details »</a>
-			</p>
-		</div>
+				<h2>Database</h2>
+				<li><a href="dbf">List Dbf</a></li>
+				<li><a href="pos">Point Of Sale</a></li>
+				<li><a href="images">Daftar Gambar</a></li>
+				
+			</div>
+
+			<div class="col-md-3">
+					<h2>Supplier</h2>
+					<p>10 Supplier terbesar berdasarkan jumlah style 
+					    yang dikirim
+					</p>
+					<div id="supplier"></div>
+				</div>	
 	</div>
 </div>
 
@@ -79,7 +75,7 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jQuery.menuUI.js"></script> 
-<script type="text/javascript" src="js/felino.js"></script>    
+<script type="text/javascript" src="js/felino.jss"></script>    
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -88,29 +84,56 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 		<script type="text/javascript" src="js/calendar.js"></script>
 		
-<script type="text/javascript">
-	var calendar = $("#calendar").calendar(
-		{
-			tmpl_path: "/tmpls/",
-			events_source: function () { return []; }
-		});			
-</script>
-<script>
 
-	  $('#table_id').DataTable();
-    $.ajax({
-	url:"http://103.28.15.75:8069/api/images/22",
+<script>
+ var json	
+ $.ajax({
+	url:"menu",dataType: "json",
 	success:function(data){
+       // alert(data);
+       // console.log(data);
 		var clickAction = function(id){
 			console.log("clickAction: ", id);
 		}
 	   
-		$("#gambar").html(data);
+		$( "#menuUI" ).menuUI(data, clickAction);
     } //endof success
 }); //endof .ajax​​​​
+ $.ajax({
+		url:"http://103.28.15.75:8069/api/infodb",
+		dataType: 'json',
+	    success:function(data){
+			$("#infodb").html(data);
+			$.each(data, function(index, element) {
+            $('#infodb').append(element.name);
+        });
+		}});
+$.ajax({
+		url:"http://103.28.15.75:8069/api/supplier/topten",
+		dataType: 'json',
+	    success:function(data){
+			
+			$.each(data, function(index, element) {
+            $('#supplier').append(element.name);
+        });
+		}});		
+		
+
+function carigambar(str){
+	if (str.length==0) {
+    document.getElementById("gambar").innerHTML="";
+    return;
+    }
+	    $.ajax({
+        url:"images/"+str,
+	    success:function(data){
+			$("#gambar").html(data);
+		}});
+}
 
 
-	Highcharts.chart('container', {
+
+Highcharts.chart('container', {
 
 title: {
 	text: 'Data Penjualan Perhari'

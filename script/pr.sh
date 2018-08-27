@@ -1,1 +1,1 @@
-hbrun product.prg -lib libct
+hbrun /var/www/html/api/script/product.prg -lib libct
