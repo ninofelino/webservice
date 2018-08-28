@@ -176,13 +176,25 @@ Flight::route('/syncron', function(){
     echo $output;
 });
 
-  Flight::route('/product/list', function(){
+Flight::route('/product/list', function(){
    
     // $product=product(); 
     $sql = file_get_contents('views/sql/pr.supplier.detail.sql');
     $db = Flight::db();
      $results=$db->query($sql)->fetchAll();
      Flight::json($results);
+     
+  });
+
+  Flight::route('/product/supplier/@id', function($id){
+   
+    // $product=product(); 
+    $sql = file_get_contents('views/sql/pr.supplier.detail.sql');
+    $sql .=" where supplier='".$id."'";
+    echo $sql;
+    $db = Flight::db();
+     $results=$db->query($sql)->fetchAll();
+    Flight::json($results);
      
   });
 

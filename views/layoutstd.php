@@ -27,15 +27,30 @@
 
 <body>
 
-<nav id="menuUI"></nav>
+<nav id="menuUI">
+
+</nav>
 <div class="container-fluid">
 	<br><br>
-	{% block content %}
+    {% block content %}
+    {% block javascripts %}{% endblock %}
     {% endblock %} 
 </div>
 
 
-		
+<script>
+       $.ajax({
+	url:"menu",dataType: "json",
+	success:function(data){
+   	var clickAction = function(id){
+			console.log("clickAction: ", id);
+		}
+	   
+		$( "#menuUI" ).menuUI(data, clickAction);
+    } //endof success
+});
+
+</scipt>		
 
 	
 </body>

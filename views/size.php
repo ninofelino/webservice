@@ -1,8 +1,8 @@
-{% extends "layout.php" %}
+{% extends "layoutstd.php" %}
 
 
 {% block content %}
-
+<div class="row">
 <h2>SIZE</h2>
 <table id="example" class="mdl-data-table" >
         <thead>
@@ -24,10 +24,22 @@
         </tbody>
        
     </table>
-
+</div>
 <script>
+
+
 $(document).ready(function() {
     $('#example').DataTable();
+    $.ajax({
+	url:"menu",dataType: "json",
+	success:function(data){
+   	var clickAction = function(id){
+			console.log("clickAction: ", id);
+		}
+	   
+		$( "#menuUI" ).menuUI(data, clickAction);
+    } //endof success
+});
 } );
 </script>
 {% endblock %}

@@ -1,0 +1,1 @@
+psql -U cottaclaire --password  cottaclaire -d felino -f inv.dmp -h localhost

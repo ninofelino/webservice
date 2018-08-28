@@ -1,0 +1,15 @@
+SELECT ( SELECT supplier.name
+           FROM supplier
+          WHERE supplier.id::text = a.supplier) AS name,
+    album(rtrim(a.article::text)) AS album,
+    a.mclass,
+    a.article
+   FROM ( SELECT "left"(product.barcode::text, 3) AS supplier,
+            product.mclass,
+            product.article,
+            array_agg(rtrim(product.size::text)) AS ukuran,
+            array_agg(ROW(product.barcode, product.size)) AS array_agg,
+            count(*) AS count,
+            min(product.barcode) AS min
+           FROM product
+          GROUP BY ("left"(product.barcode::text, 3)), product.mclass, product.article) a;
