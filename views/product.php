@@ -12,10 +12,11 @@
     <div class="col-md-4">
     <button class="btn btn-primary">Download</button>
     <button class="btn btn-primary">Print</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   Edit
 </button>
-       
+
+     
         <table class=" table-stripped">
              <thead>
              <th>Style Name</th>
@@ -54,36 +55,35 @@
 </div>
 
 
-
+<div id="myModal" class="modal fade centered-modal" role="dialog">
+   <div class="modal-dialog">
+	<!-- konten modal-->
+	<div class="modal-content">
+		<!-- heading modal -->
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Edit Article</h4>
+		</div>
+		<!-- body modal -->
+		<div class="modal-body">
+      <p>bagian body modal.</p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, consectetur enim dolore repellendus laborum blanditiis nihil minima eaque rem fugiat exercitationem consequuntur consequatur nesciunt nemo nulla harum? Sequi, ex placeat.
+		</div>
+		<!-- footer modal -->
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+   </div>
+</div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 {% block javascripts %}
 <script>
 
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-});
+
 
 
 $.ajax({
@@ -153,12 +153,15 @@ $('#jstree').on('changed.jstree', function (e, data) {
       $.ajax({ 
         url: hasil,success:
         function(data){
-            
+          $('#hasil').LoadingOverlay("show");
               $.each( data, function( key, val ) {
                 isibaris='<tr><td><b>'+val['article']+'</b><td><td><small>'+val['colour']+'</small><td>'+val['mclass']+'</td>'+'<td>'+val['size']+'</td></tr>';
                 $('#hasil').append(isibaris);
              // alert(key);
-          });
+             $('#hasil').LoadingOverlay("hide", true);
+          }
+        
+        );
           
         }
 

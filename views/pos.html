@@ -1,4 +1,4 @@
-{% extends "layout.php" %}
+{% extends "layoutstd.php" %}
 
 {% block header %}
 <script src="js/jquery.autocompleter.js"></script> 
@@ -66,94 +66,485 @@ body{
 }
 
 </style>
-<div class = "mdl-layout__content">    
-    <div class = "mdl-grid">
-              
-      <div class = "mdl-cell mdl-cell--3-col graybox" height="520px" style="background:#fa4b2a;">
-          
-            <input id="barcode" value="3"/>
-            <table>
-              <tbody>
-                  <div id="results"  ></div>
-              </tbody>
-            </table>
-            
-         
+
+    <div class="wrapper">
+      <div class="topbar">
+        <div class="container">
+          <div class="navbar-left">
+            <div id="liveclock">08/28/2018 06:30:05</div>
+          </div>
+  
+          <div class="navbar-right" style="margin:0">
+            <a href="http://cottaclaire.com/ospos/public/home/change_password/1" class="modal-dlg" data-btn-submit="Kirim" title="employees_change_password (TBD)">System Administrator</a>					  |  					<a href="http://cottaclaire.com/ospos/public/home/logout">Keluar</a>				</div>
+  
+          <div class="navbar-center" style="text-align:center">
+            <strong>Nuansa Baru</strong>
+          </div>
+        </div>
       </div>
-
-        <div class = "mdl-cell mdl-cell--6-col graybox">
-            <div class="spin" data-spin /></div> 
-            <button id="addrow" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                >Add</button>   
-            <hr>    
-            <table id="items" width="50%">
-                <col width="80px" />
-                <col width="80px" />
-                <col width="40px" />
-                <col width="100px" />
-                <thead>
-                      <th>Barcode</th>
-                      <th>Article</th>
-                      <th>Qty</th>
-                      <th>Discount</th>
-                      <th>Total</th>
-                </thead>  
-                <tbody>
-                      <tr class="item-row">
-                      <td>12345678</td>
-                      <td>VIVINICI</td>
-                      <td>1</td>
-                      <td>10000</td>
-                      <td>1000000</td>  
-                      </tr>  
-                </tbody>    
-
-
-            </table>    
-      </div>
-      
-      
-      <div class = "mdl-cell mdl-cell--2-col graybox" style="background:#fa4b2a;">
-           Pilih Pelanggan (Opsional)
-           <input type="text" id="members"/>
-           <button id="tombol" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-            PelangganBaru</button>
-           <hr>
-
-           <div class="mdl-layout-spacer"></div>
-           
-           <br>Jumlah Dari 0 Item
-           <br>Sub Total
-           <br>Total
-           <div class="mdl-layout-spacer"></div>
-            type pembayaran
-            <div class="mdl-layout-spacer"></div>
-            Nilai pembayaran
-            <div class="mdl-layout-spacer"></div>
-            <button id="terima" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
-                <i class="material-icons">add</i>
-    
+  
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
             </button>
-            <div class="mdl-layout-spacer"></div>
-            <button>Tangguhkan</button>
-            <button>Batal Jual</button>
-
-	    </div>
- 
+        
+            <a class="navbar-brand hidden-sm" href="http://cottaclaire.com/ospos/public/">ABC</a>
+          </div>
+  
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/customers" title="Pelanggan" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/customers.png" border="0" alt="Module Icon"/><br/>
+                    Pelanggan								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/items" title="Item Barang" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/items.png" border="0" alt="Module Icon"/><br/>
+                    Item Barang								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/item_kits" title="Item Paket" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/item_kits.png" border="0" alt="Module Icon"/><br/>
+                    Item Paket								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/suppliers" title="Pemasok" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/suppliers.png" border="0" alt="Module Icon"/><br/>
+                    Pemasok								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/reports" title="Laporan" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/reports.png" border="0" alt="Module Icon"/><br/>
+                    Laporan								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/receivings" title="Penerimaan" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/receivings.png" border="0" alt="Module Icon"/><br/>
+                    Penerimaan								</a>
+                </li>
+                            <li class="active">
+                  <a href="http://cottaclaire.com/ospos/public/sales" title="Penjualan" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/sales.png" border="0" alt="Module Icon"/><br/>
+                    Penjualan								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/giftcards" title="Gift Card" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/giftcards.png" border="0" alt="Module Icon"/><br/>
+                    Gift Card								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/messages" title="Messages" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/messages.png" border="0" alt="Module Icon"/><br/>
+                    Messages								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/expenses" title="Biaya" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/expenses.png" border="0" alt="Module Icon"/><br/>
+                    Biaya								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/expenses_categories" title="Kategori Biaya" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/expenses_categories.png" border="0" alt="Module Icon"/><br/>
+                    Kategori Biaya								</a>
+                </li>
+                            <li class="">
+                  <a href="http://cottaclaire.com/ospos/public/office" title="Kantor" class="menu-icon">
+                    <img src="http://cottaclaire.com/ospos/public/images/menubar/office.png" border="0" alt="Module Icon"/><br/>
+                    Kantor								</a>
+                </li>
+                        </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="row">
+     
+  
+  
+  <div id="register_wrapper">
+  
+  <!-- Top register controls -->
+  
+    <form action="http://cottaclaire.com/ospos/public/sales/change_mode" id="mode_form" class="form-horizontal panel panel-default" method="post" accept-charset="utf-8">
+  <input type="hidden" name="csrf_ospos_v3" value="8d86d4c672f4da5a3d67ef094c43086d" />      
+      <div class="panel-body form-group">
+        <ul>
+          <li class="pull-left first_li">
+            <label class="control-label">Jenis Transaksi</label>
+          </li>
+          <li class="pull-left">
+            <select name="mode" onchange="$('#mode_form').submit();" class="selectpicker show-menu-arrow" data-style="btn-default btn-sm" data-width="fit">
+  <option value="sale" selected="selected">Faktur Penjualan</option>
+  <option value="sale_quote">sales_quote (TBD)</option>
+  <option value="sale_invoice">Faktur</option>
+  <option value="return">Retur</option>
+  </select>
+          </li>
+                    <li class="pull-left">
+              <label class="control-label">Lokasi Stock</label>
+            </li>
+            <li class="pull-left">
+  <select name="stock_location" onchange="$('#mode_form').submit();" class="selectpicker show-menu-arrow" data-style="btn-default btn-sm" data-width="fit">
+  <option value="8">bojongsoang</option>
+  <option value="4">cimanggu</option>
+  <option value="7">cinunuk</option>
+  <option value="1" selected="selected">citrus</option>
+  <option value="5">dramaga</option>
+  <option value="2">golden</option>
+  <option value="9">griya</option>
+  <option value="3">junction</option>
+  <option value="6">surken</option>
+  </select>
+            </li>
           
+          <li class="pull-right">
+            <button class='btn btn-default btn-sm modal-dlg' id='show_suspended_sales_button' data-href='http://cottaclaire.com/ospos/public/sales/suspended'
+                title='Penangguhan'>
+              <span class="glyphicon glyphicon-align-justify">&nbsp</span>Penangguhan					</button>
+          </li>
+  
+                    <li class="pull-right">
+              <a href="http://cottaclaire.com/ospos/public/sales/manage" class="btn btn-primary btn-sm" id="sales_takings_button" title="Ambil Alih"><span class="glyphicon glyphicon-list-alt">&nbsp</span>Ambil Alih</a>					</li>
+                </ul>
+      </div>
+    </form>
+    
+    <form action="http://cottaclaire.com/ospos/public/sales/add" id="add_item_form" class="form-horizontal panel panel-default" method="post" accept-charset="utf-8">
+                          <input type="hidden" name="csrf_ospos_v3" value="8d86d4c672f4da5a3d67ef094c43086d" />
+      <div class="panel-body form-group">
+        <ul>
+          <li class="pull-left first_li">
+            <label for="item" class='control-label'>Cari/Scan Item ATAU Faktur</label>
+          </li>
+          <li class="pull-left">
+            <input type="text" name="item" value="" id="item" class="form-control input-sm" size="50" tabindex="1"  />
+            <span class="ui-helper-hidden-accessible" role="status"></span>
+          </li>
+          <li class="pull-right">
+            <button id='new_item_button' class='btn btn-info btn-sm pull-right modal-dlg' data-btn-new='Baru' data-btn-submit='Kirim' data-href='http://cottaclaire.com/ospos/public/items/view'
+                title='Item Baru'>
+              <span class="glyphicon glyphicon-tag">&nbsp</span>Item Baru					</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  
+  <!-- Sale Items List -->
+  
+    <table class="sales_table_100" id="register">
+      <thead>
+        <tr>
+          <th style="width: 5%;">Hapus</th>
+          <th style="width: 15%;">Barang #</th>
+          <th style="width: 35%;">Nama Item</th>
+          <th style="width: 10%;">Harga</th>
+          <th style="width: 10%;">Jumlah</th>
+          <th style="width: 10%;">Diskon %</th>
+          <th style="width: 10%;">Total</th>
+          <th style="width: 5%;">Ubah</th>
+        </tr>
+      </thead>
+  
+      <tbody id="cart_contents">
+                <tr>
+            <td colspan='8'>
+              <div class='alert alert-dismissible alert-info'>Tidak ada Item dalam Keranjang Belanja.</div>
+            </td>
+          </tr>
+            </tbody>
+    </table>
+  </div>
+  
+  <!-- Overall Sale -->
+  
+  <div id="overall_sale" class="panel panel-default">
+    <div class="panel-body">
+      <form action="http://cottaclaire.com/ospos/public/sales/select_customer" id="select_customer_form" class="form-horizontal" method="post" accept-charset="utf-8">
+  <input type="hidden" name="csrf_ospos_v3" value="8d86d4c672f4da5a3d67ef094c43086d" />                                        
+                <div class="form-group" id="select_customer">
+            <label id="customer_label" for="customer" class="control-label" style="margin-bottom: 1em; margin-top: -1em;">Pilih Pelanggan (Opsional)</label>
+            <input type="text" name="customer" value="Ketik Nama Pelanggan..." id="customer" class="form-control input-sm"  />
+  
+            <button class='btn btn-info btn-sm modal-dlg' data-btn-submit='Kirim' data-href='http://cottaclaire.com/ospos/public/customers/view'
+                title='Pelanggan Baru'>
+              <span class="glyphicon glyphicon-user">&nbsp</span>Pelanggan Baru					</button>
+  
+          </div>
+            </form>
+      <table class="sales_table_100" id="sale_totals">
+        <tr>
+          <th style="width: 55%;">Jumlah dari 0 item</th>
+          <th style="width: 45%; text-align: right;">0</th>
+        </tr>
+        <tr>
+          <th style="width: 55%;">Sub-total</th>
+          <th style="width: 45%; text-align: right;">Rp0</th>
+        </tr>
+  
+        
+        <tr>
+          <th style='width: 55%;'>Total</th>
+          <th style="width: 45%; text-align: right;"><span id="sale_total">Rp0</span></th>
+        </tr>
+      </table>
+  
+        </div>
+  </div>
+  
+<script>
+$(document).ready(function()
+{
+	$('#item').focus();
 
-    </div>  
-</div>                
+	$('#item').blur(function()
+	{
+		$(this).val("Ketik Nama Barang atau Scan Barcode...");
+	});
 
-<div id="bg"></div>
-	<div id="modal-kotak">
-		<div id="atas">
-			   <label>Nama pelanggan</label><input type="text"/>
-		</div>
-		<div id="bawah">
-			<button id="tombol-tutup">CLOSE</button>
-		</div>
-	</div>	 
+	$("#item").autocomplete(
+	{
+		source: 'product/list',
+		minChars: 0,
+		autoFocus: false,
+		delay: 500,
+		select: function (a, ui) {
+			$(this).val(ui.item.value);
+			$("#add_item_form").submit();
+			return false;
+		}
+	});
+
+	$('#item').keypress(function (e) {
+		if(e.which == 13) {
+      alert('s');
+			$('#add_item_form').submit();
+			return false;
+		}
+	});
+
+	var clear_fields = function()
+	{
+		if($(this).val().match("Ketik Nama Barang atau Scan Barcode...|Ketik Nama Pelanggan..."))
+		{
+			$(this).val('');
+		}
+	};
+
+	$('#item, #customer').click(clear_fields).dblclick(function(event)
+	{
+		$(this).autocomplete("search");
+	});
+
+	$('#customer').blur(function()
+	{
+		$(this).val("Ketik Nama Pelanggan...");
+	});
+
+	$("#customer").autocomplete(
+	{
+		source: 'http://cottaclaire.com/ospos/public/customers/suggest',
+		minChars: 0,
+		delay: 10,
+		select: function (a, ui) {
+			$(this).val(ui.item.value);
+			$("#select_customer_form").submit();
+		}
+	});
+
+	$('#customer').keypress(function (e) {
+		if(e.which == 13) {
+			$('#select_customer_form').submit();
+			return false;
+		}
+	});
+
+	$(".giftcard-input").autocomplete(
+	{
+		source: 'http://cottaclaire.com/ospos/public/giftcards/suggest',
+		minChars: 0,
+		delay: 10,
+		select: function (a, ui) {
+			$(this).val(ui.item.value);
+			$("#add_payment_form").submit();
+		}
+	});
+
+	$('#comment').keyup(function()
+	{
+		$.post('http://cottaclaire.com/ospos/public/sales/set_comment', {comment: $('#comment').val()});
+	});
+
+			$('#sales_invoice_number').keyup(function()
+		{
+			$.post('http://cottaclaire.com/ospos/public/sales/set_invoice_number', {sales_invoice_number: $('#sales_invoice_number').val()});
+		});
+
+		var enable_invoice_number = function()
+		{
+			var enabled = $("#sales_invoice_enable").is(":checked");
+			$("#sales_invoice_number").prop("disabled", !enabled).parents('tr').show();
+			return enabled;
+		}
+
+		enable_invoice_number();
+
+		$("#sales_invoice_enable").change(function()
+		{
+			var enabled = enable_invoice_number();
+			$.post('http://cottaclaire.com/ospos/public/sales/set_invoice_number_enabled', {sales_invoice_number_enabled: enabled});
+		});
+	
+	$("#sales_print_after_sale").change(function()
+	{
+		$.post('http://cottaclaire.com/ospos/public/sales/set_print_after_sale', {sales_print_after_sale: $(this).is(":checked")});
+	});
+
+	$("#price_work_orders").change(function()
+	{
+		$.post('http://cottaclaire.com/ospos/public/sales/set_price_work_orders', {price_work_orders: $(this).is(":checked")});
+	});
+
+	$('#email_receipt').change(function()
+	{
+		$.post('http://cottaclaire.com/ospos/public/sales/set_email_receipt', {email_receipt: $(this).is(":checked")});
+	});
+
+	$("#finish_sale_button").click(function()
+	{
+		$('#buttons_form').attr('action', 'http://cottaclaire.com/ospos/public/sales/complete');
+		$('#buttons_form').submit();
+	});
+
+	$("#finish_invoice_quote_button").click(function()
+	{
+		$('#buttons_form').attr('action', 'http://cottaclaire.com/ospos/public/sales/complete');
+		$('#buttons_form').submit();
+	});
+
+	$("#suspend_sale_button").click(function()
+	{
+		$('#buttons_form').attr('action', 'http://cottaclaire.com/ospos/public/sales/suspend');
+		$('#buttons_form').submit();
+	});
+
+	$("#cancel_sale_button").click(function()
+	{
+		if(confirm('Anda yakin ingin membatalkan transaksi penjualan ini?  Semua item akan dihapus.'))
+		{
+			$('#buttons_form').attr('action', 'http://cottaclaire.com/ospos/public/sales/cancel');
+			$('#buttons_form').submit();
+		}
+	});
+
+	$("#add_payment_button").click(function()
+	{
+		$('#add_payment_form').submit();
+	});
+
+	$("#payment_types").change(check_payment_type).ready(check_payment_type);
+
+	$("#cart_contents input").keypress(function(event)
+	{
+		if(event.which == 13)
+		{
+			$(this).parents("tr").prevAll("form:first").submit();
+		}
+	});
+
+	$("#amount_tendered").keypress(function(event)
+	{
+		if(event.which == 13)
+		{
+			$('#add_payment_form').submit();
+		}
+	});
+
+	$("#finish_sale_button").keypress(function(event)
+	{
+		if(event.which == 13)
+		{
+			$('#finish_sale_form').submit();
+		}
+	});
+
+	dialog_support.init("a.modal-dlg, button.modal-dlg");
+
+	table_support.handle_submit = function(resource, response, stay_open)
+	{
+		$.notify(response.message, { type: response.success ? 'success' : 'danger'} );
+
+		if(response.success)
+		{
+			if(resource.match(/customers$/))
+			{
+				$("#customer").val(response.id);
+				$("#select_customer_form").submit();
+			}
+			else
+			{
+				var $stock_location = $("select[name='stock_location']").val();
+				$("#item_location").val($stock_location);
+				$("#item").val(response.id);
+				if(stay_open)
+				{
+					$("#add_item_form").ajaxSubmit();
+				}
+				else
+				{
+					$("#add_item_form").submit();
+				}
+			}
+		}
+	}
+
+	$('[name="price"],[name="quantity"],[name="discount"],[name="description"],[name="serialnumber"],[name="discounted_total"]').change(function() {
+		$(this).parents("tr").prevAll("form:first").submit()
+	});
+});
+
+function check_payment_type()
+{
+	var cash_rounding = "0";
+
+	if($("#payment_types").val() == "Kupon Bonus")
+	{
+		$("#sale_total").html("Rp0");
+		$("#sale_amount_due").html("Rp0");
+		$("#amount_tendered_label").html("Nomor Gift Card");
+		$("#amount_tendered:enabled").val('').focus();
+		$(".giftcard-input").attr('disabled', false);
+		$(".non-giftcard-input").attr('disabled', true);
+		$(".giftcard-input:enabled").val('').focus();
+	}
+	else if($("#payment_types").val() == "Tunai" && cash_rounding)
+	{
+		$("#sale_total").html("Rp0");
+		$("#sale_amount_due").html("Rp0");
+		$("#amount_tendered_label").html("Nilai Pembayaran");
+		$("#amount_tendered:enabled").val('0');
+		$(".giftcard-input").attr('disabled', true);
+		$(".non-giftcard-input").attr('disabled', false);
+	}
+	else
+	{
+		$("#sale_total").html("Rp0");
+		$("#sale_amount_due").html("Rp0");
+		$("#amount_tendered_label").html("Nilai Pembayaran");
+		$("#amount_tendered:enabled").val('0');
+		$(".giftcard-input").attr('disabled', true);
+		$(".non-giftcard-input").attr('disabled', false);
+	}
+}
+</script>
+
+	 
 
 <script>
 $('#tombol').click(function(){

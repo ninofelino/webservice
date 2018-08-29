@@ -421,6 +421,15 @@ Flight::route('/member', function(){
    
 });
 
+Flight::route('/member/list', function(){
+    
+     $sql = file_get_contents('views/sql/member.sql');
+     $db = Flight::db();
+     $results=$db->query($sql)->fetchAll();
+     Flight::json($results);
+   
+});
+
 
 Flight::route('/mclass', function(){
     $loader = new Twig_Loader_Filesystem('views');
@@ -434,6 +443,19 @@ Flight::route('/mclass', function(){
             'mclass'  => $mclass
             ));
     }); 
+
+    Flight::route('/terminal', function(){
+        $loader = new Twig_Loader_Filesystem('views');
+        $twig = new Twig_Environment($loader);
+        $menu = menus();
+        $db = Flight::db();
+        $mclass=$db->query('select * from mclass')->fetchAll();
+        echo $twig->render('terminal.php', array(
+                'name' =>'Mclass',
+                'menu'  => $menu,
+                'mclass'  => $mclass
+                ));
+        }); 
 
     Flight::route('/mclass/list', function(){
         $pdo = new PDO("pgsql:dbname=felino;host=103.28.15.75", "deploy", "nuansabaru123");
