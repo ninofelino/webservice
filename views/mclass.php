@@ -1,16 +1,38 @@
-{% extends "layout.php" %}
+{% extends "layoutstd.php" %}
 
 
 {% block content %}
 
-
-
-    <div id="jstree"></div>
+<div class="flexbox-container">  
+    <br>
+	<div>
+		<input> 
+		<div id="jstree"></div>
+    </div>
+</div>	
      
 
   
 
 <script>
+menunav();	
+
+function menunav(){
+	$.ajax({
+	url:"menu",dataType: "json",
+	success:function(data){
+   	var clickAction = function(id){
+			console.log("clickAction: ", id);
+		}
+	   
+		$( "#menuUI" ).menuUI(data, clickAction);
+    } //endof success
+});
+
+};
+
+
+
 $('#jstree').jstree({
 		'core' : {
 			'data' : {

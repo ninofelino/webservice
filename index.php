@@ -316,11 +316,8 @@ Flight::route('/product/list', function(){
      });
 
      Flight::route('/dbf/list', function(){
-        // print_r(getFileList('/var/www/html/DAT'));
-    //  header('Content-Type: application/json');
-       // echo getFileList('/var/www/html/DAT');
         Flight::json(getFileList('/var/www/html/DAT'));
-      });
+     });
 
         Flight::route('/colour', function(){
             $menu = menus();
@@ -387,6 +384,15 @@ Flight::json($results);
    
 });
 
+Flight::route('/branch/list', function(){
+    
+    $sql = file_get_contents('views/sql/branch.sql');
+    $db = Flight::db();
+    $results=$db->query($sql)->fetchAll();
+    
+    Flight::json($results);
+  
+});
 Flight::route('/branch', function(){
     $menu = menus();
     $sql = file_get_contents('views/sql/pr.size.sql');
@@ -423,11 +429,32 @@ Flight::route('/member', function(){
 
 Flight::route('/member/list', function(){
     
-     $sql = file_get_contents('views/sql/member.sql');
-     $db = Flight::db();
-     $results=$db->query($sql)->fetchAll();
-     Flight::json($results);
-   
+    $sql = file_get_contents('views/sql/member.sql');
+    $db = Flight::db();
+    $results=$db->query($sql)->fetchAll();
+    
+    Flight::json($results);
+  
+});
+
+Flight::route('/memberlevel/list', function(){
+    
+    $sql = file_get_contents('views/sql/memberlevel.sql');
+    $db = Flight::db();
+    $results=$db->query($sql)->fetchAll();
+    
+    Flight::json($results);
+  
+});
+
+Flight::route('/member/@id', function($id){
+    
+    $sql = file_get_contents('views/sql/member.sql');
+    $sql = $sql." where name like '".$id."%' LIMIT 20";
+    $db = Flight::db();
+    $results=$db->query($sql)->fetchAll();
+    Flight::json($results);
+  
 });
 
 
