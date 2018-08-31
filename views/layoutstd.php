@@ -60,7 +60,7 @@
     } //endof success
 });
 
-</scipt>		
+</script>		
 
 	
 </body>

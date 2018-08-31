@@ -315,8 +315,24 @@ Flight::route('/product/list', function(){
         ));
      });
 
+
+     Flight::route('/samba', function(){
+       echo file_get_contents('/etc/samba/smb.conf');
+     });
+
      Flight::route('/dbf/list', function(){
         Flight::json(getFileList('/var/www/html/DAT'));
+     });
+
+     Flight::route('/dir/@id', function($id){
+
+
+      
+        $a=array("sales"=>"/srv/samba/share/SALES",
+                 "dbf"=>"/var/www/html/DAT");
+        echo $id;
+        echo array_search($id,$a);
+        Flight::json(getFileList(array_search("sales",$a)));
      });
 
         Flight::route('/colour', function(){
@@ -347,6 +363,58 @@ Flight::route('/product/list', function(){
             
             //echo print_r($brand);
             echo $twig->render('uom.php', array(
+                'name'  => 'Frey',
+                'brand'  => $brand,
+                'menu'  => $menu
+            ));
+           
+        }); 
+        
+        Flight::route('/po', function(){
+            $menu = menus();
+            $loader = new Twig_Loader_Filesystem('views');
+            $twig = new Twig_Environment($loader);
+            $sql = "select * from menus";
+            $db = Flight::db();
+            $brand=$db->query('select colour from product group by colour')->fetchAll();
+            
+            //echo print_r($brand);
+            echo $twig->render('po.html', array(
+                'name'  => 'Frey',
+                'brand'  => $brand,
+                'menu'  => $menu
+            ));
+           
+        }); 
+
+        Flight::route('/install', function(){
+            $menu = menus();
+            $loader = new Twig_Loader_Filesystem('views');
+            $twig = new Twig_Environment($loader);
+            $sql = "select * from menus";
+            $db = Flight::db();
+            $brand=$db->query('select colour from product group by colour')->fetchAll();
+            
+            //echo print_r($brand);
+            echo $twig->render('install.html', array(
+                'name'  => 'Frey',
+                'brand'  => $brand,
+                'menu'  => $menu
+            ));
+           
+        }); 
+
+
+        Flight::route('/server', function(){
+            $menu = menus();
+            $loader = new Twig_Loader_Filesystem('views');
+            $twig = new Twig_Environment($loader);
+            $sql = "select * from menus";
+            $db = Flight::db();
+            $brand=$db->query('select colour from product group by colour')->fetchAll();
+            
+            //echo print_r($brand);
+            echo $twig->render('server.php', array(
                 'name'  => 'Frey',
                 'brand'  => $brand,
                 'menu'  => $menu

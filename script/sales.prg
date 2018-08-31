@@ -1,2 +1,5 @@
 USE "/srv/samba/share/SALES/C0010101.DBF" SHARED NEW
-browse()
+do while !eof()
+? recno()
+skip
+enddo

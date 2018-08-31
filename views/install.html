@@ -1,0 +1,67 @@
+{% extends "layoutstd.php" %}
+
+
+{% block content %}
+<hr>
+<div class="flexbox-container">
+    <div>
+        SSH
+        <hr>
+        ps -aux | grep ssh
+        <br>sudo apt-get install openssh-server -y
+        <br>sudo nano /etc/ssh/sshd_config
+        <br>sudo apt-get install nano -y
+        <br>#port 22
+        <br>Port 1337
+        <br>sudo ufw allow 1337
+        <br>sudo service ssh restart
+    </div>
+    <div>
+        Samba
+        <hr>
+        <br>sudo apt-get update
+        <br>Next, install Samba:
+
+        <br>sudo apt-get install samba
+        sudo systemctl stop nmbd.service
+sudo systemctl disable nmbd.service
+        <br>sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.orig
+        <br>sudo nano /etc/samba/smb.conf
+        <p>
+            [global]
+        server string = samba_server
+        server role = standalone server
+        interfaces = lo your_network_interface
+        bind interfaces only = yes
+        disable netbios = yes
+        smb ports = 445
+        log file = /var/log/samba/smb.log
+        max log size = 10000
+        </p>
+    </div>
+    <div>
+        LAMP
+        <hr>  
+        <br>sudo apt install tasksel
+        <br>sudo tasksel install lamp-server
+        sudo dpkg -i harbour_3.2.0-1_LM18_amd64.deb
+        <br>sudo apt install git
+        sudo apt-get update
+        sudo apt-get install nodejs
+        sudo apt-get install npm
+        nodejs -v
+        <br>sudo apt-get install postgresql postgresql-contrib
+        sudo apt-get install pgadmin3
+
+    </div>
+</div>
+
+
+SAMBA
+
+LAMP
+
+POSTGRE
+{% block javascripts %}
+{% endblock %}
+{% endblock %}
