@@ -5,7 +5,7 @@
 
 <div class="flexbox-container">  
     <br>
-	<div>
+	<div style="overflow:scroll;width:500px">
 		<input> 
 		<div id="jstree"></div>
     </div>

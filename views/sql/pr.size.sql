@@ -1,4 +1,4 @@
-select size 
+select size,count(*) as jml
 FROM
 (
 select mclass,article,array_agg(rtrim(size)) as size from product where left(barcode,3)='009'

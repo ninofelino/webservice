@@ -2,14 +2,29 @@
 
 
 {% block content %}
+<style>
+.item-flex{
+  background:red;
+  padding: 10px;
+}  
+</style>  
 
-<div class="row">
+<div class="flexbox-container">
       <br><br>
-     <div class="col-md-3">
+     <div class="item-flex" 
+     style="background:#c4c4c4;
+      overflow: scroll;
+     " >
+     <br>
      <input class="form-control" placeholder="Search Product" name="srch-term" id="srch-term" type="text">
-        <div id="jstree"></div>
+     
+     <div id="jstree"></div>
     </div>
-    <div class="col-md-4">
+<div class="item-flex"
+style="background:#c4c4c4;
+      overflow: scroll;
+     "
+>
     <button class="btn btn-primary">Download</button>
     <button class="btn btn-primary">Print</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -30,7 +45,7 @@
     
         
     </div>
-    <div class="col-md-2">
+    <div class="gambar">
         
         <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Cari Gambar di Clouds" onkeyup="carigambar(this.value)">
             <div id="gambar"></div>   

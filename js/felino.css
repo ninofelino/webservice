@@ -9,15 +9,28 @@
 	padding: 10px;
     background:grey;
     height:800px;
+    overflow: scroll;
 }
 
 .item-flex {
     height:100%;
-    background:#c6c4c4;
+    background:greenyellow;
+    overflow: scroll;
 }
 
 .flexbox-container > div:first-child {
 	margin-right: 20px;
     background:#c4c6c4;
     display:wrap;
+}
+
+#jstree {
+    height: 500px;
+    overflow: scroll;
+}
+
+#gambar{
+    background-color: aquamarine;
+    overflow:scroll;
+    height:600px;
 }

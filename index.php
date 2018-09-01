@@ -60,6 +60,20 @@ Flight::route('/login', function(){
 
 });
 
+
+Flight::route('/info', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('info.html', array(
+    'name'  => 'Home',
+  'city'  => 'Samarinda',
+  'menu'    => $menu
+
+));
+
+});
+
 Flight::route('POST /login', 'login');
 
 

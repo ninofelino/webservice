@@ -1,5 +1,6 @@
-USE "/srv/samba/share/SALES/C0010101.DBF" SHARED NEW
+USE "/srv/samba/share/SALES/C0010101.DBF" ALIAS sales SHARED NEW
 do while !eof()
-? recno()
+? dbf(),sales->FLAG,sales->CODE,sales->DESC,sales->QTY,sales->PRICE,sales->CPRICE,sales->NORCP,sales->ETYPE,sales->DDATE,sales->DEPT
+
 skip
 enddo

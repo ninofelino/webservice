@@ -8,7 +8,8 @@
         <thead>
             <tr>
                 
-                <th>Name</th>
+            <th>Name</th>
+            <th>Name</th>
                 
             </tr>
         </thead>
@@ -17,6 +18,7 @@
              {% for row in size %}
        <tr>
        <td>{{ row.size }}</td>
+       <td>{{ row.jml }}</td>
      
        </tr>
     {% endfor %}
@@ -30,16 +32,7 @@
 
 $(document).ready(function() {
     $('#example').DataTable();
-    $.ajax({
-	url:"menu",dataType: "json",
-	success:function(data){
-   	var clickAction = function(id){
-			console.log("clickAction: ", id);
-		}
-	   
-		$( "#menuUI" ).menuUI(data, clickAction);
-    } //endof success
-});
+    
 } );
 </script>
 {% endblock %}
