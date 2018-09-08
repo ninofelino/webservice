@@ -43,15 +43,7 @@ $dsn = "pgsql:host=$host;port=5432;dbname=$db;user=$username;password=$password"
 }
 
 
-function Xproduct(){
-    getResult("select * from product");
-};
 
-
-function productSupplier(){
-    $sql = file_get_contents('view/sql/pr.supplier.sql');
-    getResult($sql);
-};
 
 
 function menu(){
@@ -169,7 +161,15 @@ function get_menu($data, $parent = 0) {
         ));
     };
 
-    
+     function imagelist($dir,$pattern){
+         $files=find($dir, $pattern);
+         echo '<div style="background:#FAFAFA;width:460px;height:700px;overflow:scroll;padding:5px">';
+         
+         foreach($files as $file){
+            echo '<img style="padding:2px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)" class="gb" src="http://103.28.15.75:8069/images/'.basename($file).'" height="100">';
+         };
+         echo "</div>";          
+     }
 
 
      function find($dir, $pattern){
@@ -183,5 +183,17 @@ function get_menu($data, $parent = 0) {
       
         return $files;
     }
+
+
+   function linuxuser(){
+    $output = array();
+    $command = "cat /etc/passwd | cut -d\":\" -f1";
+    echo 'running the command: <b>'.$command."</b><br />";
+    exec($command,$output);
+    echo implode("<br />\n", $output);
+   }
+   
+   
+
 
 ?>     

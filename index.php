@@ -5,7 +5,23 @@ include 'tree.php';
 
 Flight::register('db', 'PDO', array('pgsql:host=103.28.15.75;dbname=felino','deploy','nuansabaru123'));
 
+Flight::route('/test', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+   // echo $twig->render('test.html', array('name'  => 'Home'));
+    linuxuser();
+   
+});
 
+Flight::route('/route', function(){
+    $menu = menus();
+    $loader = new Twig_Loader_Filesystem('views');
+    $twig = new Twig_Environment($loader);
+    echo $twig->render('route.html', array('name'  => 'Home'));
+   
+   
+});
 Flight::route('/', function(){
     $menu = menus();
     $loader = new Twig_Loader_Filesystem('views');
@@ -19,18 +35,7 @@ Flight::route('/', function(){
 
 });
 
-Flight::route('/test', function(){
-    $menu = menus();
-    $loader = new Twig_Loader_Filesystem('views');
-    $twig = new Twig_Environment($loader);
-    echo $twig->render('layoutstd.php', array(
-    'name'  => 'Home',
-  'city'  => 'Samarinda',
-  'menu'    => $menu
 
-));
-
-});
 
 
 Flight::route('/calendar', function(){
@@ -209,6 +214,13 @@ Flight::route('/product/list', function(){
     $db = Flight::db();
      $results=$db->query($sql)->fetchAll();
     Flight::json($results);
+     
+  });
+
+  Flight::route('/directory/@dir', function($dir){
+   
+   
+    imagelist("/var/www/html/images","*.jpg");
      
   });
 
