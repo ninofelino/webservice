@@ -1,0 +1,82 @@
+Bli Cac Xms 100%,0      #  Use Xms to Cache Overlay
+Bli Exe Cli F95;
+Bli Ove Ops 100         #  Increasing Overlay RAM 40Kb -> 100Kb
+Bli Mem Pac 20
+Bli Inc Off
+beginarea               #  Select modules from CLIPPER to be overlayed
+   mod accept
+   mod acopy
+   mod adel
+   mod aeval
+   mod ains
+   mod appinit
+   mod atail
+   mod box
+   mod cmem
+   mod date
+   mod dbcmd0
+   mod dbcmd1
+   mod dbcmd2
+   mod dbcmd3
+   mod dbcmd4
+   mod dbcmd5
+   mod dbcreate
+   mod dbf0
+   mod dbf1
+   mod dbfdyn
+   mod dbjunct
+   mod dbstruct
+   mod dtx0
+   mod dtx1
+   mod dtxdyn
+   mod dynina
+   mod errsys0
+   mod errsys1
+   mod fget
+   mod getenv
+   mod gets0
+   mod gets1
+   mod gets2
+   mod gx
+   mod joinlist
+   mod lupdate
+   mod memory
+   mod mrelease
+   mod msave
+   mod net
+   mod oldbox
+   mod oldclear
+   mod philes
+   mod run
+   mod saverest
+   mod sdf0
+   mod sdf1
+   mod seq
+   mod setcurs
+   mod sortbloc
+   mod startsym
+   mod tb
+   mod txopen
+   mod vall
+   mod vblock
+   mod vdb
+   mod vdbg
+   mod version
+   mod vmacro
+   mod vnone
+   mod vops
+   mod vpict
+   mod vterm
+   mod workarea
+   mod xmacro
+   lib extend     #  Overlay all of EXTEND.LIB
+   lib dbfntx
+endarea
+mod tbrowse0            #  these two lines to speed up TBROWSE
+mod tbrowse1            #  and DBEDIT by forcing them to the root.
+mod rddsvr              #  must in the root (Clipper.Lib)
+mod event               #  must in the root (Clipper.Lib)
+Lib terminal
+Lib clipper
+Lib nt250b
+Lib BjdFonts

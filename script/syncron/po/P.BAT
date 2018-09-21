@@ -1,0 +1,1 @@
+c:\kasir\pos

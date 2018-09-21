@@ -1,5 +1,6 @@
 local i,aname
 local nLen,pilih
+local home:="/home/headoffice/posserver/ics/DAT"
 set defa to "/home/headoffice/posserver/ics/DAT"
 nLen:= ADir( "/home/headoffice/posserver/ics/DAT/*.DBF",aName ) 
 aName := Array( nLen ) 
@@ -17,5 +18,35 @@ else
     quit
 endif    
 DISPBOX(1,22, maxrow()-1,maxcol(),1)
-dbedit(2,23,maxrow()-2,maxcol()-1)
+dbedit(2,23,maxrow()-2,maxcol()-1,,"KeyExcept")
 enddo
+
+
+FUNCTION KeyExcept
+    PARAMETER action_key
+    *
+    DO CASE
+    CASE action_key = 27
+       * Esc...exit DBEDIT().
+       ALERT("ESCAPE")
+       QUIT
+       RETURN 0
+
+    CASE action_key = 13
+       * Return...field edit (see discussion below).
+      // RETURN FieldEdit()
+
+    CASE action_key = 7 .AND. (.NOT. EOF()) .AND.;
+    LASTREC()<> 0
+       * Del...toggle delete status.
+      
+
+    CASE action_key = -9
+       * F10...enter menu system.
+       //RETURN MenuSys()
+
+    OTHERWISE
+       * Any other key...slightly distasteful tone.
+       TONE(100, 1)
+       RETURN 1
+    ENDCASE
